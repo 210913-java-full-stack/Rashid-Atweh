@@ -32,17 +32,6 @@ CREATE TABLE accounts
 );
 
 
-CREATE TABLE address
-(
-	address_id		INT AUTO_INCREMENT,
-	address			VARCHAR(200),
-	city			VARCHAR(200),
-	state			CHAR(2),
-	zip				INT NOT NULL,
-	CONSTRAINT address_pk PRIMARY KEY (address_id)
-);
-
-
 CREATE TABLE customers
 (
     customer_id 	INT NOT NULL,
@@ -51,6 +40,17 @@ CREATE TABLE customers
     CONSTRAINT customers_pk PRIMARY KEY (customer_id), 
     CONSTRAINT customers_accounts_customers_fk FOREIGN KEY (customer_id) REFERENCES accounts_customers (customer_id),
     CONSTRAINT customers_address_fk FOREIGN KEY (address_id) REFERENCES address (address_id)
+);
+
+
+CREATE TABLE address
+(
+	address_id		INT AUTO_INCREMENT,
+	address			VARCHAR(200),
+	city			VARCHAR(200),
+	state			CHAR(2),
+	zip				INT NOT NULL,
+	CONSTRAINT address_pk PRIMARY KEY (address_id)
 );
 
 
