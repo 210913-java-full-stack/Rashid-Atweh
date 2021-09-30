@@ -18,8 +18,6 @@ public class ConnectionManager {
 
     }
 
-
-
     /*
     This is a static method for returning a connection in the factory singleton design pattern
      */

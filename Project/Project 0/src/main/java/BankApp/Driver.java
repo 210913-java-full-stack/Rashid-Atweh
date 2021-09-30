@@ -1,22 +1,39 @@
 package BankApp;
 
+import DAOs.ToDoItemDAO;
 import Utilities.ConnectionManager;
+import models.ToDoItem;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Driver {
 
     public static void main(String[] args){
         //This is where I will start my code
 
-        //try (Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD)) {
+        try {
+            Connection conn = ConnectionManager.getConnection();
 
-       //}
-            //catch (SQLException e) {}
+            ToDoItem newItem = new ToDoItem("Build a UI for our app");
+            ToDoItemDAO dao = new ToDoItemDAO(conn);
+            dao.save(newItem);
+
+
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<String> cars = new ArrayList<String>();
+        cars.add("Volvo");
+        cars.add("BMW");
+        cars.add("Ford");
+        cars.add("Mazda");
+        System.out.println(cars);
 
 
         Scanner sc = new Scanner(System.in);
