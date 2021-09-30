@@ -1,42 +1,37 @@
 package BankApp;
 
-import DAOs.ToDoItemDAO;
 import Utilities.ConnectionManager;
+import DAOs.ToDoItemDAO;
 import models.ToDoItem;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Scanner;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+
+
 
 public class Driver {
 
     public static void main(String[] args){
         //This is where I will start my code
 
+        Scanner sc = new Scanner(System.in);
+
         try {
             Connection conn = ConnectionManager.getConnection();
-
-            ToDoItem newItem = new ToDoItem("Build a UI for our app");
-            ToDoItemDAO dao = new ToDoItemDAO(conn);
-            dao.save(newItem);
-
 
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-
-        ArrayList<String> cars = new ArrayList<String>();
-        cars.add("Volvo");
-        cars.add("BMW");
-        cars.add("Ford");
-        cars.add("Mazda");
-        System.out.println(cars);
-
-
-        Scanner sc = new Scanner(System.in);
+        ArrayList<String> test = new ArrayList<String>();
+        test.add("test1");
+        test.add("test2");
+        test.add("test3");
+        test.add("test4");
+        System.out.println(test);
         boolean running = true;
         int b = 12;
             while(running) {

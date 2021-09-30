@@ -1,5 +1,6 @@
 package Utilities;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -17,6 +18,8 @@ public class ConnectionManager {
     private ConnectionManager() {
 
     }
+
+
 
     /*
     This is a static method for returning a connection in the factory singleton design pattern
