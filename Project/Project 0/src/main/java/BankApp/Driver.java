@@ -15,10 +15,8 @@ import java.util.Scanner;
 
 public class Driver {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         //This is where I will start my code
-
-        Scanner sc = new Scanner(System.in);
 
         try {
             Connection conn = ConnectionManager.getConnection();
@@ -26,67 +24,75 @@ public class Driver {
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> test = new ArrayList<String>();
-        test.add("test1");
-        test.add("test2");
-        test.add("test3");
-        test.add("test4");
-        System.out.println(test);
+
+
         boolean running = true;
-        int b = 12;
-            while(running) {
-                System.out.println("===Bank App===\nEnter selection:\n\n1) Log In.\n2) Check Balance.\nQ) Quit");
-                String input = sc.nextLine();
+        int i = 0;
+        Scanner sc = new Scanner(System.in);
 
-                switch(input)  {
-                    case "1":
-                        //Log in input
-                        System.out.println("Welcome, Please enter Username Below");
-                        String inputU = sc.nextLine();
 
-                            if ("test".equals(inputU)) {
-                                System.out.println("Welcome Back User!");
-                            }
+        while (running) {
+            System.out.println("===Bank App===\nEnter selection:\n\n1) Log In.\n2) Transaction History.\nQ) Quit");
+            String input = sc.nextLine();
+            ArrayList<Object> history = new ArrayList<>();
 
-                               else {
-                                    System.out.println("Unrecognized Username");
-                                }
-                        System.out.println("Thank You, Please enter Password Below");
-                        String inputP = sc.nextLine();
 
-                        if ("test".equals(inputP)) {
-                            System.out.println("Welcome Back User, Your Balance is currently: " + b);
+            switch (input) {
+                case "1":
+                    //Log in input
+                    System.out.println("Welcome,\nPlease enter Username Below");
+                    String inputU = sc.nextLine();
+
+                    if ("test".equals(inputU)) {
+                        System.out.println("Welcome Back " + inputU + "!");
+                    }
+                    else {
+                        System.out.println("Unrecognized Username");
+                    }
+
+                    System.out.println("\nPlease enter Password Below");
+                    String inputP = sc.nextLine();
+
+                    if ("test".equals(inputP)) {
+                        //Here you want a for loop to iterate through all of the items in the list that gets returned from history.get()
+                        for (i = 0; i < history.size(); i++) {
+
+                            System.out.println("\nWelcome Back " + inputU + "! \nYour transaction history is : " + history.get(i));
                         }
-                            else if("abc".equals(inputP)){
-                                System.out.println("Unrecognized Password, Try again");
-                                sc.nextLine();
-                                System.out.println("Unrecognized Password, Try again");
-                                sc.nextLine();
+
                     }
-                            else {
-                        System.out.println("Unrecognized Password, Goodbye");
+                    else if ("*".equals(inputP)) {
+                        System.out.println("Unrecognized Password,\nTry again");
+                        sc.nextLine();
+                        System.out.println("Unrecognized Password,\nTry again");
+                        sc.nextLine();
+                    } else {
+                        System.out.println("Unrecognized Password, \nGoodbye");
                         running = false;
                     }
 
-                        break;
+                    break;
 
-                    case "2":
-                        // access balances
-                        System.out.println("Thank You. Your balance is $" + b);
-                        break;
+                case "2":
+                    // access balances
+                    for (i = 0; i < history.size(); i++) {
+
+                        System.out.println("Thank You. \nYour balance is $" + history);
+                    }
+                    running = false;
+
+                case "Q":
+                case "q":
+                    System.out.println("Thanks for visiting");
+                    running = false;
+
+                    break;
 
 
-                    case "Q":
-                        case "q":
-                            System.out.println("Thanks for visiting");
-                        running = false;
-                        break;
+                    }
 
+        }
 
-
-                }
-
-            }
 
     }
 }
