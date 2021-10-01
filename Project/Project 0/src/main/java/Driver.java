@@ -7,6 +7,7 @@ import utils.ConnectionManager;
 import utils.ViewManager;
 
 
+import java.io.IOException;
 import java.sql.*;
 
 
@@ -16,6 +17,20 @@ public class Driver {
         //viewManager
         ViewManager viewManager = ViewManager.getViewManager();
 
+//        try {
+//            Connection conn = ConnectionManager.getConnection();
+//            String sql = "SELECT * FROM customers";
+//            PreparedStatement prepareStmt = conn.prepareStatement(sql);
+//            ResultSet rs = prepareStmt.executeQuery(); //result set
+//
+//            while (rs.next()) {
+//                System.out.println(rs.getString("fname"));
+//            }
+//
+//        }
+//        catch (SQLException e) /*| IOException e*/ {
+//            e.printStackTrace();
+//        }
 
         /**
          * This is our main loop, it keep running until something sets the viewManager "running" flag = false;
@@ -32,3 +47,5 @@ public class Driver {
         }
     }
 }
+
+
