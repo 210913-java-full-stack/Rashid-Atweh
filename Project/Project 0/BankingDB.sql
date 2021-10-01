@@ -6,7 +6,7 @@ CREATE DATABASE Banking_DB; #Start New DB
 USE Banking_DB; #Default DB
 
 #Remove any old data
-DROP TABLE IF EXISTS balance;
+DROP TABLE IF EXISTS balances;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS accounts_customers;
 DROP TABLE IF EXISTS emails;
@@ -23,7 +23,7 @@ CREATE TABLE accounts_customers
 	CONSTRAINT accounts_customers_fk PRIMARY KEY (account_id)
 );
 
-CREATE TABLE balance
+CREATE TABLE balances
 (
     account_id INT NOT NULL,
     balance DECIMAL (10, 2),
@@ -33,36 +33,38 @@ CREATE TABLE balance
 
 CREATE TABLE customers 
 (
-	customer_id INT NOT NULL,
-	name VARCHAR(200),
-	INDEX (customer_id),
-	INDEX (name),
-	CONSTRAINT customers_pk PRIMARY KEY (customer_id), 
-	CONSTRAINT customers_accounts_fk  FOREIGN KEY (customer_id) REFERENCES accounts_customers (customer_id)
-);
-
-CREATE TABLE emails
-(
-	customer_id INT NOT NULL,
-	emails VARCHAR(200),
-	INDEX (customer_id),
-	INDEX (emails),
-	CONSTRAINT emails_pk PRIMARY KEY (customer_id), 
-	CONSTRAINT emails_customers_fk FOREIGN KEY (customer_id) REFERENCES accounts_customers (customer_id)
-);
-
-CREATE TABLE password
-(
-	customer_id INT NOT NULL,
+	customer_id INT AUTO_INCREMENT,
+	#account_id INT NOT NULL,
+	fname VARCHAR(200),
+	lname VARCHAR(200),
+	uname VARCHAR(200),
 	password VARCHAR(200),
 	INDEX (customer_id),
+	INDEX (fname),
+	INDEX (lname),
+	INDEX (uname),
 	INDEX (password),
-	CONSTRAINT password_pk PRIMARY KEY (customer_id), 
-	CONSTRAINT password_customers_fk FOREIGN KEY (customer_id) REFERENCES accounts_customers (customer_id)
+	CONSTRAINT customers_pk PRIMARY KEY (customer_id) #, 
+	#CONSTRAINT customers_accounts_fk  FOREIGN KEY (customer_id) REFERENCES accounts_customers (customer_id)
 );
+
+
 
 
 ###########################################################
 ################# POPULATE DATABASE #######################
 ###########################################################
 
+INSERT INTO customers (customer_id, fname, lname, uname) VALUES (001,"Tony", "Stark", "Ironman");
+INSERT INTO customers (customer_id, fname, lname, uname) VALUES (002,"Steve", "Rogers", "CaptinAmerica");
+INSERT INTO customers (customer_id, fname, lname, uname) VALUES (003,"Bruce", "Banner", "Hulk");
+INSERT INTO customers (customer_id, fname, lname, uname) VALUES (004,"Nick", "Fury", "Shield");
+INSERT INTO customers (customer_id, fname, lname, uname) VALUES (005,"Clint", "Barker", "Hawkeye");
+INSERT INTO customers (customer_id, fname, lname, uname) VALUES (006,"Peter", "Parker", "Spiderman");
+
+#INSERT INTO %TableName (Filed1, field2) VALUES (v1, v2);
+#INSERT INTO %TableName (Filed1, field2) VALUES (v1, v2);
+#INSERT INTO %TableName (Filed1, field2) VALUES (v1, v2);
+#INSERT INTO %TableName (Filed1, field2) VALUES (v1, v2);
+#INSERT INTO %TableName (Filed1, field2) VALUES (v1, v2);
+#INSERT INTO %TableName (Filed1, field2) VALUES (v1, v2);

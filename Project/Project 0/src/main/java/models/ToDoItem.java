@@ -1,27 +1,36 @@
 package models;
 
-public class ToDoItem {
+import java.util.ArrayList;
+
+public class ToDoItem extends ArrayList<String> {
     private int id;
-    private String message;
-    private boolean complete;
+    private String name;
+
+   /* private boolean complete;
 
     public ToDoItem() {
         complete = false;
-    }
+    } */
 
-    public ToDoItem(String message) {
-        complete = false;
+    public ToDoItem(String name) {
+        //complete = false;
         this.id = id;
-        this.message = message;
+        this.name = name;
 
     }
 
-    public ToDoItem(int id, String message) {
-        complete = false;
+    public ToDoItem(int id, String name) {
+        //complete = false;
         this.id = id;
-        this.message = message;
+        this.name = name;
 
     }
+
+   /* public ToDoItem(int id, String name, boolean complete) {
+        this.id = id;
+        this.name = name;
+        this.complete = complete;
+    } */
 
 
     public int getId() {
@@ -33,19 +42,19 @@ public class ToDoItem {
     }
 
     public String getMessage() {
-        return message;
+        return name;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessage(String name) {
+        this.name = name;
     }
 
-    public boolean isComplete() {
+  /*  public boolean isComplete() {
         return complete;
     }
 
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
-
+    */
 }
