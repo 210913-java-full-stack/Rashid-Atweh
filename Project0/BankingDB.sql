@@ -1,4 +1,4 @@
-#########Rashid's First SQL DataBase!############
+#########Avengers SQL DataBase!############
 
 
 DROP DATABASE IF EXISTS Banking_DB; #Delete Old DB
@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS accounts_customers;
 
 CREATE TABLE accounts_customers 
 (
-	account_id 	INT NOT NULL ,
+	account_id 	INT AUTO_INCREMENT,
 	customer_id INT NOT NULL,
 	INDEX (account_id),
 	INDEX (customer_id),
@@ -24,7 +24,7 @@ CREATE TABLE accounts_customers
 CREATE TABLE balances
 (
 
-    account_id 	INT NOT NULL,
+    account_id 	INT AUTO_INCREMENT,
     balance DECIMAL (10, 2),
     INDEX (account_id),
     INDEX (balance),
@@ -34,7 +34,7 @@ CREATE TABLE balances
 
 CREATE TABLE customers 
 (
-	customer_id INT NOT NULL,
+	customer_id INT AUTO_INCREMENT,
 	fname VARCHAR(200),
 	lname VARCHAR(200),
 	uname VARCHAR(200),
@@ -82,22 +82,24 @@ INSERT INTO balances (account_id, balance) VALUES (900006, 12.67);
 
 #####################ACTIOMS#############################
 
+#Update balances b 
+#JOIN accounts_customers ac ON ac.account_id = b.account_id 
+#JOIN customers c ON c.customer_id = ac.customer_id 
+#SET balance = (balance + 12) 
+#WHERE uname = "Hulk";
 
-SELECT c.uname AS "Username", CONCAT(c.fname, " ", c.lname) AS "NAME & ID", b.balance AS "Balance", c.password
-FROM customers c 
-JOIN accounts_customers ac ON c.customer_id = ac.customer_id
-JOIN balances b ON ac.account_id = b.account_id;
+INSERT INTO customers c (customer_id, fname, lname, uname, password) VALUES (001,"Tony", "Stark", "Ironman","Pepper");
+
+
+#SELECT c.uname AS "Username", CONCAT(c.fname, " ", c.lname) AS "NAME & ID", b.balance AS "Balance", c.password
+#FROM customers c 
+#JOIN accounts_customers ac ON c.customer_id = ac.customer_id
+#JOIN balances b ON ac.account_id = b.account_id;
 
 #SELECT balance
 #FROM balances b
 #JOIN accounts_customers ac ON  ac.account_id = b.account_id 
 #JOIN customers c ON  c.customer_id = ac.customer_id
 #WHERE c.uname = "";
-
-
-
-
-
-
 
 

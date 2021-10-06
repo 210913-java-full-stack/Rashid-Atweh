@@ -14,28 +14,35 @@ public class Driver {
     static boolean running = true;
 
     public static void main(String[] args) throws SQLException {
-
-        /*
-        This is kyles hint code
-        When we do the array list we are literally making our own version of the collections we already are familiar with
-
-         */
-        List<String> newList = new ArrayList<>();
-        newList.add("Hello");
-
-        MyListInterface<String> myNewList = new MyArrayList<>();
-        myNewList.add("Hello");
-
-
-
+//
+//        /*
+//        This is kyles hint code
+//        When we do the array list we are literally making our own version of the collections we already are familiar with
+//
+//         */
+//        List<String> newList = new ArrayList<>();
+//        newList.add("Hello");
+//
+//        MyListInterface<String> myNewList = new MyArrayList<>();
+//        myNewList.add("Hello");
+//
+//    }
+//
+//    public static void start() {
         Connection conn = ConnectionManager.getConnection();
         while (running = true) {
-            System.out.println("Welcome to the Java bank");
-            Username.Login();
+            System.out.println("Welcome to the Avengers First Bank");
+            try {
+                Username.Login();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             break;
 
         }
     }
+
+
 
 
     public static void end() {
