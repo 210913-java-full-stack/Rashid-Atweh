@@ -60,7 +60,6 @@ INSERT INTO accounts_customers (customer_id, account_id) VALUES (0004, 900004);
 INSERT INTO accounts_customers (customer_id, account_id) VALUES (0005, 900005);
 INSERT INTO accounts_customers (customer_id, account_id) VALUES (0006, 900006);
 
-
 INSERT INTO customers (customer_id, fname, lname, uname, password) VALUES (001,"Tony", "Stark", "Ironman","Pepper");
 INSERT INTO customers (customer_id, fname, lname, uname, password) VALUES (002,"Steve", "Rogers", "CaptinAmerica","Peggy");
 INSERT INTO customers (customer_id, fname, lname, uname, password) VALUES (003,"Bruce", "Banner", "Hulk","Betty");
@@ -73,10 +72,10 @@ INSERT INTO balances (account_id, balance) VALUES (900002, 19450.25);
 INSERT INTO balances (account_id, balance) VALUES (900003, 35000.56);
 # INSERT INTO balances (account_id, balance) VALUES (900003, 350.56);
 # INSERT INTO balances (account_id, balance) VALUES (900003, 5000000.00);
-
 INSERT INTO balances (account_id, balance) VALUES (900004, 67433.00);
 INSERT INTO balances (account_id, balance) VALUES (900005, 10000.01); 
 INSERT INTO balances (account_id, balance) VALUES (900006, 12.67);
+
 
 #####################ACTIOMS#############################
 
@@ -111,9 +110,11 @@ JOIN balances b ON ac.account_id = b.account_id;
 
 # This gets you the greatest ID in the list, and all your have to do is now add 1 to it for your insert statement.
 # Then just keep that id until you do the inserts into other tables and use that ID to link the foreign keys - 
+
 # Do this logic in java, and marshall the objects with constructors or setters, and then we can send the object 
-# over to the CRUD methods to be inserted. When doing this, get the next available id's from the tables with a
-# query like above, and just store these ids in the objects.
+# over to the CRUD methods to be inserted. 
+
+# When doing this, get the next available id's from the tables with a query like above, and just store these ids in the objects.
 # So for instance, create a new customer object, set fname, set lname, set uname and password, then query for the 
 # greatest ID in the table with a query like the one written above, add 1 to that number, and that's your customer_id, 
 # then use another setter to put into the object.
