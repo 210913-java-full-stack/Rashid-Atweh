@@ -17,6 +17,23 @@ public class Driver {
         //viewManager
         ViewManager viewManager = ViewManager.getViewManager();
 
+
+        /**
+         * This is our main loop, it keep running until something sets the viewManager "running" flag = false;
+         * With every loop we invoke the viewManager singleton's goToNextView() method.
+         */
+        viewManager.navigate("MainMenu");
+        while (viewManager.isRunning()) {
+            try {
+                viewManager.goToNextView();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+}
+
 //        try {
 //            Connection conn = ConnectionManager.getConnection();
 //            String sql = "SELECT * FROM customers";
@@ -32,20 +49,11 @@ public class Driver {
 //            e.printStackTrace();
 //        }
 
-        /**
-         * This is our main loop, it keep running until something sets the viewManager "running" flag = false;
-         * With every loop we invoke the viewManager singleton's goToNextView() method.
-         */
-        viewManager.navigate("MainMenu");
-        while(viewManager.isRunning()) {
-            try{
-                viewManager.goToNextView();
-            } catch(SQLException e) {
-                e.printStackTrace();
-            }
 
-        }
-    }
-}
-
+//    Scanner sc = new Scanner(System.in);
+//        System.out.println("Please enter your first name: ");
+//                String fname = sc.nextLine();
+//                System.out.println("Please enter your last name: ");
+//                String lname = sc.nextLine();
+//                System.out.println("Welcome " + fname + " " + lname + ". We are glad to see you.");
 

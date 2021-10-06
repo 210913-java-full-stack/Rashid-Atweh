@@ -32,6 +32,17 @@ CREATE TABLE accounts
 );
 
 
+CREATE TABLE address
+(
+	address_id		INT AUTO_INCREMENT,
+	address			VARCHAR(200),
+	city			VARCHAR(200),
+	state			CHAR(2),
+	zip				INT NOT NULL,
+	CONSTRAINT address_pk PRIMARY KEY (address_id)
+);
+
+
 CREATE TABLE customers
 (
     customer_id 	INT NOT NULL,
@@ -42,16 +53,6 @@ CREATE TABLE customers
     CONSTRAINT customers_address_fk FOREIGN KEY (address_id) REFERENCES address (address_id)
 );
 
-
-CREATE TABLE address
-(
-	address_id		INT AUTO_INCREMENT,
-	address			VARCHAR(200),
-	city			VARCHAR(200),
-	state			CHAR(2),
-	zip				INT NOT NULL,
-	CONSTRAINT address_pk PRIMARY KEY (address_id)
-);
 
 
 
@@ -96,18 +97,18 @@ INSERT INTO accounts (account_id, balance) VALUES (900007, 1345.67);
 #################### MAKE SOME CHANGES ####################
 ###########################################################
 
-UPDATE accounts
-SET balance = (balance * 1.05);
+#UPDATE accounts
+#SET balance = (balance * 1.05);
 
-UPDATE address 
-SET address = "74 Daytona Ave."
-WHERE address = "212 1st ave"
-AND city = "Albany"
-AND state = "NY";
+#UPDATE address 
+#SET address = "74 Daytona Ave."
+#WHERE address = "212 1st ave"
+#AND city = "Albany"
+#AND state = "NY";
 
-UPDATE accounts 
-SET balance = (balance - 25000)
-WHERE account_id = 900005;
+#UPDATE accounts 
+#SET balance = (balance - 25000)
+#WHERE account_id = 900005;
 
 
 
@@ -118,42 +119,42 @@ WHERE account_id = 900005;
 ################### TEST FRESH DATABASE ###################
 ###########################################################
 
-SELECT c.name, ad.address, ad.city, ad.state, a.account_id, a.balance
-FROM customers c
-JOIN accounts_customers ac ON c.customer_id = ac.customer_id
-JOIN accounts a ON ac.account_id = a.account_id
-JOIN address ad ON c.address_id = ad.address_id
-ORDER BY a.balance DESC;
+#SELECT c.name, ad.address, ad.city, ad.state, a.account_id, a.balance
+#FROM customers c
+#JOIN accounts_customers ac ON c.customer_id = ac.customer_id
+#JOIN accounts a ON ac.account_id = a.account_id
+#JOIN address ad ON c.address_id = ad.address_id
+#ORDER BY a.balance DESC;
 
-SELECT SUM(balance) AS "Total Deposits"
-FROM accounts;
+#SELECT SUM(balance) AS "Total Deposits"
+#FROM accounts;
 
-SELECT name 
-FROM customers
-WHERE name LIKE 'J%';
+#SELECT name 
+#FROM customers
+#WHERE name LIKE 'J%';
 
-SELECT DISTINCT state
-FROM address
-ORDER BY state;
+#SELECT DISTINCT state
+#FROM address
+#ORDER BY state;
 
-SELECT c.name, CONCAT(ad.address, " ", ad.city, ", ", ad.state) as "Home Address"
-FROM customers c 
-JOIN address ad ON c.address_id = ad.address_id
-WHERE ad.state = 'NY';
+#SELECT c.name, CONCAT(ad.address, " ", ad.city, ", ", ad.state) as "Home Address"
+#FROM customers c 
+#JOIN address ad ON c.address_id = ad.address_id
+#WHERE ad.state = 'NY';
 
-SELECT c.name, a.account_id, a.balance
-FROM customers c 
-JOIN accounts_customers ac ON c.customer_id = ac.customer_id
-JOIN accounts a ON ac.account_id = a.account_id
-WHERE balance > 5000;
+#SELECT c.name, a.account_id, a.balance
+#FROM customers c 
+#JOIN accounts_customers ac ON c.customer_id = ac.customer_id
+#JOIN accounts a ON ac.account_id = a.account_id
+#WHERE balance > 5000;
 
-SELECT ad.state, SUM(a.balance) AS "State Balance"
-FROM address ad 
-JOIN customers c ON c.address_id = ad.address_id
-JOIN accounts_customers ac ON c.customer_id = ac.customer_id
-JOIN accounts a ON ac.account_id = a.account_id
-GROUP BY ad.state
-ORDER BY SUM(a.balance) DESC;
+#SELECT ad.state, SUM(a.balance) AS "State Balance"
+#FROM address ad 
+#JOIN customers c ON c.address_id = ad.address_id
+#JOIN accounts_customers ac ON c.customer_id = ac.customer_id
+#JOIN accounts a ON ac.account_id = a.account_id
+#GROUP BY ad.state
+#ORDER BY SUM(a.balance) DESC;
 
 
 
