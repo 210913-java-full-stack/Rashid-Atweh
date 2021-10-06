@@ -25,6 +25,7 @@ public class Username {
         System.out.println("Please enter your User Name & Password to begin. \nUsername:");
         inputU = scanner.nextLine();
         setUsername(inputU);
+
         String sql = "SELECT * FROM customers c WHERE uname = ?";
         PreparedStatement prepareStmt = conn.prepareStatement(sql);
         prepareStmt.setString(1, Username);
@@ -64,7 +65,7 @@ public class Username {
         while (rsP.next()) {
             if (rsP.getString("password").equals(inputP)) {
                 System.out.println("Thank you");
-                Balances.bh();
+                Balances.balances();
             }
              else {
                 // code for unrecognized usernames

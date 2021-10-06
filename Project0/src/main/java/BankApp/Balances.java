@@ -20,10 +20,14 @@ public class Balances {
 
 
 
-    public static boolean bh() throws SQLException {
-        boolean running = true;
-
-        System.out.println("\nPress 1 to see your Balance \nPress 2 to make a Deposit. \nPress 3 to make a Withdrawals \nPress 4 to open a new account. \nPress any other key to Quit");
+    public static boolean balances() throws SQLException {
+//        boolean running = true;
+        System.out.println("\n~~~~~~~ MAIN MENU ~~~~~~~");
+        System.out.println("\nPress 1 to see your Balance.");
+        System.out.println("Press 2 to make a Deposit.");
+        System.out.println("Press 3 to make a Withdrawal");
+        System.out.println("Press 4 to open a New Account.");
+        System.out.println("Press any other key to Quit.");
         String sql = "SELECT balance FROM balances b JOIN accounts_customers ac ON ac.account_id = b.account_id JOIN customers c ON c.customer_id = ac.customer_id WHERE uname= ? ";
         PreparedStatement prepareStmt = conn.prepareStatement(sql);
         prepareStmt.setString(1, Username.getUsername());
@@ -36,8 +40,8 @@ public class Balances {
                 switch (inputB) {
                     case "1":
                         // View Balance
-                        System.out.println("Your balance is: $"+ rs.getString("balance"));
-                        bh();
+                        System.out.println("\nYour balance is: $"+ rs.getString("balance"));
+                        balances();
                         return false;
 
                     case "2":
@@ -52,7 +56,7 @@ public class Balances {
 
                     case "4":
                         //New Accounts
-
+                        Account.accounts();
 
                     default:
                         // code to end program

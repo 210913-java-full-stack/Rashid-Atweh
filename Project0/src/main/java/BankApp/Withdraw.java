@@ -22,16 +22,21 @@ public class Withdraw {
             PreparedStatement prepareStmtD = conn.prepareStatement(sqlD);
             prepareStmtD.setString(1, inputD);
             prepareStmtD.setString(2, Username.getUsername());
-            ResultSet rs = prepareStmtD.executeQuery(); //result set
+            //ResultSet rs = prepareStmtD.executeQuery(); //result set
+            prepareStmtD.executeUpdate();
 
+            //write query to get that newly updated info.
+            String sql = "SELECT balance FROM balances b JOIN accounts_customers ac ON ac.account_id = b.account_id JOIN customers c ON c.customer_id = ac.customer_id WHERE uname= ? ";
+            PreparedStatement prepareStmt = conn.prepareStatement(sql);
+            prepareStmt.setString(1, Username.getUsername());
+            ResultSet rs = prepareStmt.executeQuery(); //result set
 
             if (rs.next()) {
-                //System.out.println("Your balance is: $" + rs.getDouble("insert_id"));
-                System.out.println("Your new balance is: $" + rs.getDouble("balance"));
-                Balances.bh();
+                System.out.println("Thank You" + rs.getDouble("Uname"));
+                Balances.balances();
             }
             else {
-                Balances.bh();
+                Balances.balances();
 
             }
 
