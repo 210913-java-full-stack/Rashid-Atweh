@@ -103,10 +103,15 @@ JOIN balances b ON ac.account_id = b.account_id;
 # Here is an example of a query that can be used to figure out the next ID you want to use when 
 # doing inserts into accounts, customers, and junction table
 
-#SELECT * 
-#FROM balances b 
-#ORDER BY account_id DESC 
-#LIMIT 1
+SELECT * 
+FROM accounts_customers ac 
+ORDER BY account_id DESC 
+LIMIT 1
+
+SELECT * 
+FROM  customers c 
+ORDER BY customer_id DESC 
+LIMIT 1
 
 # This gets you the greatest ID in the list, and all your have to do is now add 1 to it for your insert statement.
 # Then just keep that id until you do the inserts into other tables and use that ID to link the foreign keys - 

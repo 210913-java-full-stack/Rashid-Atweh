@@ -50,6 +50,7 @@ public class MyArrayList<E> implements MyListInterface<E>{
     @Override
     public E get(int index) {
         //write me
+
         //return (E)array[0];//not actually valid, just a hint. This is where we need to cast our Object as out generic E
         return null;
     }

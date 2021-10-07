@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import static java.lang.Integer.valueOf;
+
 public class Account {
 
     private static final Connection conn = ConnectionManager.getConnection();
@@ -23,8 +25,8 @@ public class Account {
     private static String Uname = inputU;
     private static String Password = inputP;
 
-    private static int AID;
-    private static int CID;
+    private static int aid;
+    private static int cid;
 
     public static void accounts() throws SQLException {
         System.out.println("Thank you for inquiring about opening a new account.");
@@ -57,50 +59,54 @@ public class Account {
 
 
 //        Find AID
-        String sqlAID = "#SELECT * FROM balances b ORDER BY account_id DESC LIMIT 1 ";
+        String sqlAID = "SELECT * FROM accounts_customers ac ORDER BY account_id DESC LIMIT 1 ";
         PreparedStatement prepareStmtAID = conn.prepareStatement(sqlAID);
-        prepareStmtAID.executeQuery(); //result set
-        ResultSet rsAID = prepareStmtAID.executeQuery();
+        prepareStmtAID.executeQuery();
+        ResultSet rsAID = prepareStmtAID.executeQuery();//result set
 
-            while (rsAID.next()) {
-                AID = rsAID.getInt(AID) + 1;
-                setAID(AID);
-
+            if (rsAID.next()) {
+               aid = rsAID.getInt("account_id") + 1 ;
         }
+        System.out.println(aid);
+
 
 // Find Cid
-        String sqlCID = "#SELECT * FROM balances b ORDER BY account_id DESC LIMIT 1 ";
+        String sqlCID = "SELECT * FROM customers c ORDER BY customer_id DESC LIMIT 1 ";
         PreparedStatement prepareStmtCID = conn.prepareStatement(sqlCID);
         prepareStmtCID.executeQuery(); //result set
         ResultSet rsCID = prepareStmtCID.executeQuery();
 
 
-            while (rsCID.next()) {
-            CID = rsCID.getInt(CID) + 1;
-            setCID(CID);
-    }
+           if (rsCID.next()) {
+            setCid(rsCID.getInt("customer_id") + 1);
+            }
+        System.out.println(cid);
+
 
 // SQL to set up account ids
-        String sqlA = "INSERT INTO accounts_customers (account_id, customer_id) VALUES (?,?);"; //,
+        String sqlA = "INSERT INTO accounts_customers (account_id, customer_id) VALUES (?,?)";
         PreparedStatement prepareStmtA = conn.prepareStatement(sqlA);
-        prepareStmtA.setString(1, String.valueOf(getAID()));
-        prepareStmtA.setString(2, String.valueOf(getCID()));
+        prepareStmtA.setString(1, String.valueOf(aid));
+        prepareStmtA.setString(2, String.valueOf(cid)); //************************************************
         prepareStmtA.executeUpdate();
+
+
 
 // SQL to set up input user details
         String sqlU = "INSERT INTO customers (customer_id, fname, lname, uname, password) VALUES (?, ?, ?, ?, ?) ";
         PreparedStatement prepareStmtU = conn.prepareStatement(sqlU);
-        prepareStmtU.setString(1, String.valueOf(getCID()));
+        prepareStmtU.setString(1, String.valueOf(cid));
         prepareStmtU.setString(2, getFname());
         prepareStmtU.setString(3, getLname());
         prepareStmtU.setString(4, getUname());
         prepareStmtU.setString(5, getPassword());
         prepareStmtU.executeUpdate();
 
+
 // SQL for inserting Funds into balance
         String sqlB = "INSERT INTO balances (account_id, balance) VALUES (?, ?);";
         PreparedStatement prepareStmtB = conn.prepareStatement(sqlB);
-        prepareStmtB.setString(1, String.valueOf(getAID()));
+        prepareStmtB.setString(1, String.valueOf(aid));
         prepareStmtB.setString(2, getBalance());
         prepareStmtB.executeUpdate();
 
@@ -169,21 +175,22 @@ public class Account {
     }
 
     //Account_id getter / setters
-    public static int getAID() {
-        return AID;
+    public static int getAid() {
+        return aid;
     }
 
-    public static void setAID(int newAID) {
-        AID = newAID;
+    public static void setAid(int newAID) {
+        aid = newAID;
     }
 
     //Account_id getter / setters
-    public static int getCID() {
-        return CID;
+    public static int getCid() {
+
+        return cid;
     }
 
-    public static void setCID(int newCID) {
-        CID= newCID;
+    public static void setCid(int newCID) {
+        cid = newCID;
     }
 
 }
