@@ -3,8 +3,8 @@ package DAOs;
 
 
 import BankApp.Balances;
-import BankApp.Driver;
-import collections.MyLinkedList;
+import collections.MyArrayList;
+
 import java.sql.*;
 
 public class DAO implements GenericDAO<Balances> {
@@ -63,13 +63,13 @@ public class DAO implements GenericDAO<Balances> {
     }
 
     @Override
-    public MyLinkedList<Balances> getAllItems() throws SQLException {
+    public MyArrayList getAllItems() throws SQLException {
         String sql = "SELECT * FROM customers";
         Statement stmt = conn.createStatement();
 
         ResultSet rs = stmt.executeQuery(sql);
 
-        MyLinkedList<Balances> resultList = new MyLinkedList<>();
+        MyArrayList<Balances>  resultList = new MyArrayList<Balances> ();
 
         while(rs.next()) {
             //Balances newItem = new Balances(rs.getInt("id"), rs.getString("message")/* , rs.getBoolean("complete")*/);

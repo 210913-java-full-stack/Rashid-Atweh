@@ -1,17 +1,15 @@
 package BankApp;
 
-import collections.MyArrayList;
-import collections.MyListInterface;
 import utils.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 
 public class Driver {
     static boolean running = true;
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws SQLException {
 //
@@ -31,14 +29,27 @@ public class Driver {
 //    public static void start() {
         Connection conn = ConnectionManager.getConnection();
         while (running = true) {
-            System.out.println("Welcome to the Avengers First Bank");
-            try {
-                Username.Login();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            break;
+            System.out.println("Welcome to the First Avengers Bank");
+            System.out.println("Press 1 to Login.");
+            System.out.println("Press 2 to Open an Account.");
+            System.out.println("Press any other key to Quit.");
+            String input = scanner.nextLine();
 
+            switch (input) {
+                case "1":
+                try {
+                    Username.Login();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+                case "2":
+                    Account.accounts();
+
+                default:
+                    end();
+            }
         }
     }
 

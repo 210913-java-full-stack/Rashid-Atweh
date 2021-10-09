@@ -1,6 +1,6 @@
 package DAOs;
 
-import collections.MyLinkedList;
+import collections.MyArrayList;
 
 import java.sql.SQLException;
 
@@ -14,7 +14,7 @@ public interface GenericDAO<T> {
     //read
         //query data from database, fill in empty model object
         public T getItemByID(int id) throws SQLException;
-        public MyLinkedList<T> getAllItems() throws SQLException;
+        public MyArrayList getAllItems() throws SQLException;
         //public ToDoItem getItemByKeyword(String keyword); //SELECT * FROM items WHERE message LIKE "%KEYWORD%"
     //update
         // we will use the save() method for updates

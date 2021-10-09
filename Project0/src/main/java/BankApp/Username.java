@@ -26,7 +26,7 @@ public class Username {
         inputU = scanner.nextLine();
         setUsername(inputU);
 
-        String sql = "SELECT * FROM customers c WHERE uname = ?";
+        String sql = "SELECT c.uname AS \"Username\", CONCAT(c.fname, \" \", c.lname) AS \"NAME & ID\" FROM customers c WHERE uname = ? LIMIT 1";
         PreparedStatement prepareStmt = conn.prepareStatement(sql);
         prepareStmt.setString(1, Username);
         ResultSet rs = prepareStmt.executeQuery(); //result set
@@ -38,7 +38,7 @@ public class Username {
 
                 if (rs.getString("uname").equals(inputU)) {
                     // code to check DB for valid username will go here
-                    System.out.println("Welcome back " + rs.getString("fname"));
+                    System.out.println("Welcome back " + rs.getString("NAME & ID"));
                     // if user enters valid username then check password
                     setUsername(Username);
                     break;

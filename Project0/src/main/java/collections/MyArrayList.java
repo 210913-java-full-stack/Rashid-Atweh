@@ -1,5 +1,6 @@
 package collections;
 
+import java.security.PrivateKey;
 import java.util.Arrays;
 
 ////////////////////////////////// THIS STUFF IS HINTS ABOUT IMPLEMENTING ARRAYLIST ////////////////////////////////////
@@ -16,89 +17,108 @@ import java.util.Arrays;
 //        return (E[]) o;
 //    }
 ////////////////////////////////// THIS STUFF IS HINTS ABOUT IMPLEMENTING ARRAYLIST ////////////////////////////////////
-public class MyArrayList<E> implements MyListInterface<E>{
-    int size;
+public class MyArrayList<E>implements MyArrayListInterface<E>{
     int maxSize;
-    Object[] array;
+    private int size = 0;
+    private Object elements[];
+    private static int default_amount = 5;
 
-
-    public MyArrayList() {
-        initialize();
-//        maxSize = 2;
-//        size = 0;
-//        array = new Object[maxSize];
+    public MyArrayList()
+    {
+        //create new array for arraylist of the default amount of 5
+        elements = new Object[default_amount];
     }
-
 
     @Override
     public int size() {
+
         return size;
     }
 
     @Override
     public void add(E e) {
-//write me
+        if(size >= elements.length){
+            increaseSize();
+        }
+        elements[size++] = e;
     }
 
     @Override
     public void add(E e, int index) {
+        if(index >= size || index<0){
+            throw new IndexOutOfBoundsException(index + " is out of bounds.");
+        }
+        if((size+1) >= elements.length)
+        {
+            increaseSize();
+        }
+        for(int i = size;i >= index;i--)
+        {
+            elements[i+1] = elements[i];
+        }
 
-//write me
-
+        //insert given item at the index provided
+        elements[index] = e;
+        //increase the size (a la current element number) for arrayList.
+        size++;
     }
 
     @Override
     public E get(int index) {
-        //write me
-
-        //return (E)array[0];//not actually valid, just a hint. This is where we need to cast our Object as out generic E
-        return null;
+        return (E) elements[index];
+        //This is where we cast our Object as out generic E
     }
 
     @Override
     public void remove(int index) {
-//write me
+        for(int i=index;i<size;i++)
+        {
+            elements[i] = elements[i+1];
+        }
+        //decreasing current size because we removed an element.
+        size--;
 
     }
 
     @Override
     public void clear() {
         initialize();
-//        maxSize = 2;
-//        size = 0;
-//        array = new Object[maxSize];
+        //creating a new array with nothing in it, of the same size as our current one.
+
     }
 
     private void initialize(){
-        maxSize = 2;
+        Object newArray[] = new Object[size];
+        //setting a copy of that new empty array to elements, effectively clearing all objects that were currently in elements.
+        elements = Arrays.copyOf(newArray, size);
         size = 0;
-        array = new Object[maxSize];
     }
 
     @Override
     public int contains(E e) {
+        //go through the elements, if one of them matches return the index it was at.
+        for(int i=0;i<size;i++)
+        {
+            if(elements[i] == e)
+            {
+                return i;
+            }
+            else return -1;
+        }
+
+//        return -1;
         return 0;
         //write me
 
     }
 
     //We will need a growth method
-    private void growArray() {
+    private void increaseSize() {
         //initialize a new array > than old - lets do x2 max size.
-        //copy the old array into the new array
-        //set the array reference to the new array - discarding the old one for garbage collection
-        //update max size with the new array size.
-
-
-        /* This is a manual copy by looping and copying each element. We can also just use Arrays.copyOf(), which under the good does the same thing.
-        Object[] temp = new Object[maxSize];
-        for (int i = 0; i < size; i++) {
-            temp[i] = array[i];
-        }
-        */
-
-        maxSize *= 2;
-        array = Arrays.copyOf(array, maxSize);
+//double the size of the current array.
+        int newSize = elements.length * 2;
+        //copy current elements into an array of the bigger size and assign to elements.
+        elements = Arrays.copyOf(elements, newSize);
 
     }
 }
@@ -126,5 +146,3 @@ public class MyArrayList<E> implements MyListInterface<E>{
         }
     }
  */
-
-

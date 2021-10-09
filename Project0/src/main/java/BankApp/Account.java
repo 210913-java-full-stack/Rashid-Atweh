@@ -8,18 +8,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import static java.lang.Integer.valueOf;
 
 public class Account {
 
     private static final Connection conn = ConnectionManager.getConnection();
     private static final Scanner scanner = new Scanner(System.in);
     private static String inputB;
+    private static String inputE;
     private static String inputF;
     private static String inputL;
     private static String inputU;
     private static String inputP;
+
+
     private static String Balance = inputB;
+    private static String Email = inputE;
     private static String Fname = inputF;
     private static String Lname = inputL;
     private static String Uname = inputU;
@@ -41,7 +44,11 @@ public class Account {
         String inputL = scanner.nextLine();
         setLname(inputL);
 
-        System.out.println("Please Enter you UserName / SuperHero Name");
+        System.out.println("Please Enter you Email Address.");
+        String inputE = scanner.nextLine();
+        setEmail(inputE);
+
+        System.out.println("Please Enter you UserName (SuperHero Name)");
         String inputU = scanner.nextLine();
         setUname(inputU);
 
@@ -54,8 +61,7 @@ public class Account {
         setBalance(inputB);
 
         System.out.println("Thank You");
-        System.out.println(inputF + inputL + inputU + inputP + inputB);
-
+//        System.out.println(inputF + inputL + inputU + inputP + inputB + inputE);
 
 
 //        Find AID
@@ -64,10 +70,9 @@ public class Account {
         prepareStmtAID.executeQuery();
         ResultSet rsAID = prepareStmtAID.executeQuery();//result set
 
-            if (rsAID.next()) {
-               aid = rsAID.getInt("account_id") + 1 ;
+        if (rsAID.next()) {
+            aid = rsAID.getInt("account_id") + 1;
         }
-        System.out.println(aid);
 
 
 // Find Cid
@@ -77,30 +82,30 @@ public class Account {
         ResultSet rsCID = prepareStmtCID.executeQuery();
 
 
-           if (rsCID.next()) {
+        if (rsCID.next()) {
             setCid(rsCID.getInt("customer_id") + 1);
-            }
-        System.out.println(cid);
+        }
 
 
 // SQL to set up account ids
         String sqlA = "INSERT INTO accounts_customers (account_id, customer_id) VALUES (?,?)";
         PreparedStatement prepareStmtA = conn.prepareStatement(sqlA);
         prepareStmtA.setString(1, String.valueOf(aid));
-        prepareStmtA.setString(2, String.valueOf(cid)); //************************************************
+        prepareStmtA.setString(2, String.valueOf(cid));
         prepareStmtA.executeUpdate();
 
 
-
 // SQL to set up input user details
-        String sqlU = "INSERT INTO customers (customer_id, fname, lname, uname, password) VALUES (?, ?, ?, ?, ?) ";
+        String sqlU = "INSERT INTO customers (customer_id, fname, lname, uname, password, email) VALUES (?, ?, ?, ?, ?, ?) ";
         PreparedStatement prepareStmtU = conn.prepareStatement(sqlU);
         prepareStmtU.setString(1, String.valueOf(cid));
         prepareStmtU.setString(2, getFname());
         prepareStmtU.setString(3, getLname());
         prepareStmtU.setString(4, getUname());
         prepareStmtU.setString(5, getPassword());
+        prepareStmtU.setString(6, getEmail());
         prepareStmtU.executeUpdate();
+
 
 
 // SQL for inserting Funds into balance
@@ -110,21 +115,21 @@ public class Account {
         prepareStmtB.setString(2, getBalance());
         prepareStmtB.executeUpdate();
 
-
 // Display Balance
-        String sqlB2 = "SELECT balance FROM balances b JOIN accounts_customers ac ON ac.account_id = b.account_id JOIN customers c ON c.customer_id = ac.customer_id WHERE uname= ? ";
+        String sqlB2 = "SELECT * FROM balances b JOIN accounts_customers ac ON ac.account_id = b.account_id JOIN customers c ON c.customer_id = ac.customer_id WHERE uname= ? ";
         PreparedStatement prepareStmtB2 = conn.prepareStatement(sqlB2);
         prepareStmtB2.setString(1, getUname());
         ResultSet rsB2 = prepareStmtB2.executeQuery(); //result set
 
 
-       if (rsB2.next()) {
+        if (rsB2.next()) {
             System.out.println("Your New Balance Is: $" + rsB2.getString("balance"));
             Balances.balances();
 
         }
 
     }
+
 
     //First Name getter / setters
     public static String getFname() {
@@ -170,9 +175,7 @@ public class Account {
         return Balance;
     }
 
-    public static void setBalance(String newBalance) {
-        Balance= newBalance;
-    }
+    public static void setBalance(String newBalance) {Balance = newBalance;}
 
     //Account_id getter / setters
     public static int getAid() {
@@ -184,13 +187,16 @@ public class Account {
     }
 
     //Account_id getter / setters
-    public static int getCid() {
-
-        return cid;
-    }
+    public static int getCid() {return cid;}
 
     public static void setCid(int newCID) {
         cid = newCID;
     }
+
+    //Email Getter / Setter
+    private static String getEmail() {return Email;}
+
+    private static void setEmail(String newEmail) {Email = newEmail;}
+
 
 }
