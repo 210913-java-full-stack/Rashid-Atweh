@@ -35,23 +35,21 @@ public class Balances {
         PreparedStatement prepareStmt = conn.prepareStatement(sql);
         prepareStmt.setString(1, Username.getUsername());
         ResultSet rs = prepareStmt.executeQuery(); //result set
-        MyArrayList<String> accounts = new MyArrayList<String>();
+        MyArrayList<Double> accounts = new MyArrayList<Double>();
 
                 switch (inputB) {
                     case "1":
-
-                        if (rs.next()) {
 //                        Code to display multiple balances will show here
-                            accounts.add(String.valueOf(rs));
 
-                            System.out.println("\nYour balance is: $" + accounts);
-                            break;
-//                            balances();
+                            while (rs.next()){
+                                accounts.add(rs.getDouble("balance"));
+
                         }
-                        else {
+                                for (int i = 0; i < accounts.size(); i++) {
+                                    System.out.println("\nYour balance is: $" + accounts.get(i));
+                                }
                             balances();
-                            return false;
-                        }
+
 
                     case "2":
                         //Deposits
@@ -73,7 +71,7 @@ public class Balances {
                         Driver.end();
                         return false;
             }
-return false;
+
     }
 
 
