@@ -1,14 +1,13 @@
 package BankApp;
 
 import utils.ConnectionManager;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-
+//Class used to Validate username & passwords
 public class Username {
 
     public static boolean running;
@@ -72,7 +71,6 @@ public class Username {
                 System.out.println("Sorry, \nPlease Try Again.");
                 Login();
             }
-//            return false;
 
         }
         return true;

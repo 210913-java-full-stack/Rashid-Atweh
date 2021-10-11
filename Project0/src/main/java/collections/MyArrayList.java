@@ -20,13 +20,12 @@ import java.util.Arrays;
 public class MyArrayList<E>implements MyArrayListInterface<E>{
     int maxSize;
     private int size = 0;
-    private Object elements[];
-    private static int default_amount = 5;
+    int i =5;
+    //create new array
+    private Object funds[] = new Object[i];
 
     public MyArrayList()
     {
-        //create new array for arraylist of the default amount of 5
-        elements = new Object[default_amount];
     }
 
     @Override
@@ -37,35 +36,31 @@ public class MyArrayList<E>implements MyArrayListInterface<E>{
 
     @Override
     public void add(E e) {
-        if(size >= elements.length){
+        if(size >= funds.length){
             increaseSize();
         }
-        elements[size++] = e;
+        funds[size++] = e;
     }
 
     @Override
     public void add(E e, int index) {
-        if(index >= size || index<0){
-            throw new IndexOutOfBoundsException(index + " is out of bounds.");
-        }
-        if((size+1) >= elements.length)
+        if((size+1) >= funds.length)
         {
             increaseSize();
         }
         for(int i = size;i >= index;i--)
         {
-            elements[i+1] = elements[i];
+            funds[i+1] = funds[i];
         }
-
         //insert given item at the index provided
-        elements[index] = e;
-        //increase the size (a la current element number) for arrayList.
+        funds[index] = e;
+        //increase the size for arrayList.
         size++;
     }
 
     @Override
     public E get(int index) {
-        return (E) elements[index];
+        return (E) funds[index];
         //This is where we cast our Object as out generic E
     }
 
@@ -73,7 +68,7 @@ public class MyArrayList<E>implements MyArrayListInterface<E>{
     public void remove(int index) {
         for(int i=index;i<size;i++)
         {
-            elements[i] = elements[i+1];
+            funds[i] = funds[i+1];
         }
         //decreasing current size because we removed an element.
         size--;
@@ -90,7 +85,7 @@ public class MyArrayList<E>implements MyArrayListInterface<E>{
     private void initialize(){
         Object newArray[] = new Object[size];
         //setting a copy of that new empty array to elements, effectively clearing all objects that were currently in elements.
-        elements = Arrays.copyOf(newArray, size);
+        funds = Arrays.copyOf(newArray, size);
         size = 0;
     }
 
@@ -99,7 +94,7 @@ public class MyArrayList<E>implements MyArrayListInterface<E>{
         //go through the elements, if one of them matches return the index it was at.
         for(int i=0;i<size;i++)
         {
-            if(elements[i] == e)
+            if(funds[i] == e)
             {
                 return i;
             }
@@ -114,11 +109,10 @@ public class MyArrayList<E>implements MyArrayListInterface<E>{
 
     //We will need a growth method
     private void increaseSize() {
-        //initialize a new array > than old - lets do x2 max size.
-//double the size of the current array.
-        int newSize = elements.length * 2;
+        //initialize a new array > than old double the size of the current array.
+        int newSize = funds.length * 2;
         //copy current elements into an array of the bigger size and assign to elements.
-        elements = Arrays.copyOf(elements, newSize);
+        funds = Arrays.copyOf(funds, newSize);
 
     }
 }

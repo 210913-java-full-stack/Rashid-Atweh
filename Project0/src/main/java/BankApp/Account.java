@@ -1,13 +1,13 @@
 package BankApp;
 
 import utils.ConnectionManager;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+//Class used to create new accounts
 
 public class Account {
 
@@ -61,10 +61,9 @@ public class Account {
         setBalance(inputB);
 
         System.out.println("Thank You");
-//        System.out.println(inputF + inputL + inputU + inputP + inputB + inputE);
 
 
-//        Find AID
+// Find AID
         String sqlAID = "SELECT * FROM accounts_customers ac ORDER BY account_id DESC LIMIT 1 ";
         PreparedStatement prepareStmtAID = conn.prepareStatement(sqlAID);
         prepareStmtAID.executeQuery();
@@ -136,10 +135,7 @@ public class Account {
         return Fname;
     }
 
-    public static void setFname(String newFname) {
-        Fname = newFname;
-    }
-
+    public static void setFname(String newFname) {Fname = newFname;}
 
     //Last Name getter / setters
     public static String getLname() {
@@ -150,7 +146,6 @@ public class Account {
         Lname = newLname;
     }
 
-
     //UserName getter / setters
     public static String getUname() {
         return Uname;
@@ -159,7 +154,6 @@ public class Account {
     public static void setUname(String newUname) {
         Uname = newUname;
     }
-
 
     //Password getter / setters
     public static String getPassword() {

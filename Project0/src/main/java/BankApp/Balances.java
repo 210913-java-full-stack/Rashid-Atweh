@@ -1,17 +1,14 @@
 package BankApp;
 
-//import collections.ArrayList;
 import collections.MyArrayList;
 import utils.ConnectionManager;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-//import static BankApp.Account.aid;
-
+// Method used to get account balances from SQL Table
 
 public class Balances {
 
@@ -21,7 +18,7 @@ public class Balances {
     private static Connection conn = ConnectionManager.getConnection();
 
 
-
+//Menu
     public static boolean balances() throws SQLException {
         System.out.println("\n~~~~~~~~ MAIN MENU ~~~~~~~~");
         System.out.println("\nPress 1 to see your Balance.");
@@ -39,7 +36,7 @@ public class Balances {
 
                 switch (inputB) {
                     case "1":
-//                        Code to display multiple balances will show here
+//                        Code to display multiple balances
 
                             while (rs.next()){
                                 accounts.add(rs.getDouble("balance"));
@@ -67,7 +64,7 @@ public class Balances {
                         return false;
 
                     default:
-                        // code to end program
+                        // Quit
                         Driver.end();
                         return false;
             }

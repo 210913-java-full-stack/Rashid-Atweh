@@ -1,12 +1,13 @@
 package BankApp;
 
 import utils.ConnectionManager;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+//Class to add new funds to account
 
 public class Deposit {
     private static Scanner scanner = new Scanner(System.in);
